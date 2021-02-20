@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="container">
       <div class="water"></div>
-      <p>Loading...</p>
+      <p>Loading...</p>     
   </div>
 </template>
 
@@ -12,10 +12,21 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container p {
+  color: #fff;
+}
+
 .water {
   display: flex;
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
   background-color: skyblue;
   border-radius: 50%;
   margin: 0 auto;
@@ -28,9 +39,9 @@ export default {
 .water:after {
   content: "";
   position: absolute;
-  width: 300px;
-  height: 300px;
-  top: -150px;
+  width: 100px;
+  height: 100px;
+  top: -50px;
   background-color: #fff;
 }
 .water:before {

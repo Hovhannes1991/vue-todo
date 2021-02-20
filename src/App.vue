@@ -1,13 +1,14 @@
-<template>
-  <div>
+<template>  
     <div id="app">      
       <Loading v-if="loading"/>
       <LoginSignup v-else-if="!isAuth" />      
-      <div v-else>
+      <div v-else class="main_todo_container">
         <SvgForStyle />
-        <div class="logout_button_container">   
-          <div>
-            {{ userData.displayName }}
+        <div class="user_info_container">   
+          <div class="user_info">
+            <img v-if="userData.gender === 'female'" src="./assets/profile_icon_female.svg" alt="profile icon">
+            <img v-else src="./assets/profile_icon_male.svg" alt="profile icon">
+            <p>{{ userData.displayName }}</p>
             <input id="logout" type="button" value="Log Out" @click="logOut" />
           </div>
         </div>
@@ -30,6 +31,7 @@
             >
               <label class="todo">
                 <input
+                  type="checkbox"
                   class="todo__state"
                   :class="{ todo__state_done: todo.completed }"
                   @click="toggleTodoStatus(key)"
@@ -67,8 +69,7 @@
           >
         </p>
       </div>
-    </div>
-  </div>
+    </div>  
 </template>
 
 <script>
@@ -125,21 +126,20 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  width: 100vw;
-  height: 100%;
-  /* padding-top: 20%; */
-  /* background-image: url('assets/landscape.webp');
-  background-repeat: no-repeat;
-  background-size: cover; */
+  -moz-osx-font-smoothing: grayscale;  
+  color: #2c3e50;  
+}
+
+.main_todo_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main {
   background: #fff;
   font-size: 20px;
-  max-width: 500px;
+  width: 500px;
   margin: auto;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
 }
@@ -299,12 +299,35 @@ body {
 }
 
 
-.logout_button_container {
+.user_info_container {
   position: fixed;
   top: 20px;
   left: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+.user_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_info img {
+  width: 35px;
+}
+
+.user_info p {
+  margin:  0 5px;
+}
+
+@media only screen and (max-width: 580px) {
+  .main {
+    width: 90%;
+  }
+  .buttons {
+    margin-bottom: 0;
+  }
 }
 </style>

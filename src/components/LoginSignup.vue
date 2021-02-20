@@ -179,4 +179,26 @@ input {
     align-items: center;
     /* justify-content: center; */
 }
+
+@media only screen and (max-width: 600px) {
+  .main_container {
+    width: 350px;
+    padding: 15px;
+  }
+  .buttons {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .main_container {
+    width: 90%;
+  }
+  .buttons {
+    height: 50px;
+  }
+  .toggle {
+    border-radius: 10px;
+  }
+}
 </style>
