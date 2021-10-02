@@ -6,7 +6,7 @@ export default {
     async authStateChange(ctx, user) {
       if (user) {
         await ctx.commit("authStateChange", user);
-        let db = firebase.database().ref("users/" + user.uid);
+        let db = firebase.database().ref("users/" + user.uid);        
         db.on("value", (snapshot) => {
           const data = snapshot.val();
           let newTodos = {};
@@ -118,7 +118,7 @@ export default {
     },
 
     addTodo(state, newTodo) {      
-      let db = firebase.database();
+      let db = firebase.database();      
       db.ref("users/" + state.user.uid).push(newTodo);
     },
 
@@ -136,15 +136,21 @@ export default {
       let todoRef = firebase.database().ref('users/' + state.user.uid + '/' + key);
       let completed;
       todoRef.on('value', (snapshot) => {
-        completed = snapshot.val().completed;
+      // fix error "Cannot read property 'completed' of null"
+        if(snapshot.val && snapshot.val()){
+          completed = snapshot.val().completed;
+        }
       });    
-      todoRef.update({completed: !completed})
+      todoRef.update({completed: !completed, not_completed: completed})
     },
 
     logout(state){      
       state.loading = false;
       state.isAuth = false;
-      state.user.uid = "";
+      state.user =  {
+        uid: '',
+        displayName: ''
+      }
     },
 
     loginOrSignupError(state, {type, message}){
