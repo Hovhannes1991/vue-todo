@@ -1,12 +1,10 @@
-import Vue from 'vue'
-import store from './store/index'
+import { createApp } from 'vue';
+
+import {store} from './store/index'
 import App from './App.vue'
 
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/database'
-
-Vue.config.productionTip = false
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 
 firebase.initializeApp({
@@ -20,10 +18,8 @@ firebase.initializeApp({
   measurementId: "G-R853ZPGZ9D"
 });
 
-var database = firebase.database();
 
-
-new Vue({
-  store: store,
-  render: h => h(App),
-}).$mount('#app')
+const app = createApp(App);
+app.use(store);
+app.config.productionTip = false;
+app.mount('#app')

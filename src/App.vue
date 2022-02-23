@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Hello</h1>
     <Header @selectFont="SelectFont" />
     <Loading v-if="loading" />
     <LoginSignup v-else-if="!isAuth" />
@@ -8,7 +9,7 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
+import firebase from 'firebase/compat/app';
 import Header from "./components/Header.vue";
 import LoginSignup from "./components/LoginSignup";
 
@@ -37,10 +38,10 @@ export default {
   },
 
   async created() {
-    console.log(
-      `%c  Armenia  `,
-      `color: white; background: linear-gradient(red, red 33.3%,blue 33.3%, blue 66.7%, orange 66.7%, orange 100%); font-size: 50px`
-    );
+    // console.log(
+    //   `%c  Armenia  `,
+    //   `color: white; background: linear-gradient(red, red 33.3%,blue 33.3%, blue 66.7%, orange 66.7%, orange 100%); font-size: 50px`
+    // );
 
     firebase.auth().onAuthStateChanged((user) => {
       this.authStateChange(user);

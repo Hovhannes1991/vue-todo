@@ -1,7 +1,43 @@
-// import Vue from 'vue'
-import firebase from "firebase/app";
-import "firebase/database";
+import firebase from 'firebase/compat/app';
+import "firebase/compat/database";
 export default {
+  state: () => ({
+    isAuth: false,
+    user: {
+      uid: '',
+      displayName: ''
+    },
+    todos: [],
+    loading: true,
+    loginOrSignupError: {
+      message: '',
+      type: ''
+    }
+  }),
+
+  getters: {
+    todos(state) {
+      return state.todos;
+    },
+
+    isAuth(state) {
+      return state.isAuth;
+    },
+
+    userData(state) {
+      return state.user
+    },
+
+    loading(state) {
+      return state.loading;
+    },
+
+    loginOrSignupError(state){
+      return state.loginOrSignupError;
+    }
+  },
+
+
   actions: {
     async authStateChange(ctx, user) {
       if (user) {
@@ -93,8 +129,6 @@ export default {
     }
   },
 
-
-
   mutations: {
     authStateChange(state, user) {      
       if (user) {
@@ -174,41 +208,5 @@ export default {
     setLoadingStatus(state, loadingStatus){
       state.loading = loadingStatus;
     }
-  },
-
-  state: {
-    isAuth: false,
-    user: {
-      uid: '',
-      displayName: ''
-    },
-    todos: [],
-    loading: true,
-    loginOrSignupError: {
-      message: '',
-      type: ''
-    }
-  },
-
-  getters: {
-    todos(state) {
-      return state.todos;
-    },
-
-    isAuth(state) {
-      return state.isAuth;
-    },
-
-    userData(state) {
-      return state.user
-    },
-
-    loading(state) {
-      return state.loading;
-    },
-
-    loginOrSignupError(state){
-      return state.loginOrSignupError;
-    }
-  },
+  }
 };
